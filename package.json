@@ -1,0 +1,38 @@
+{
+  "name": "app",
+  "version": "0.1.0",
+  "bin": {
+    "app": "bin/app.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "deploy:ci/cd": "run-s build \"cdk deploy -- {1}  --context projectName={2} --profile {3}\" --",
+    "deploy:s3": "run-s build \"cdk deploy -- {1} --context projectName={2} --profile {3}\" --",
+    "deploy:all": "run-s \"deploy:s3  {3}  {1}  {2}\" \"deploy:ci/cd  {4}  {1}  {2}\" --"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.10",
+    "@types/node": "10.17.27",
+    "aws-cdk": "2.14.0",
+    "jest": "^26.4.2",
+    "npm-run-all": "^4.1.5",
+    "ts-jest": "^26.2.0",
+    "ts-node": "^9.0.0",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-cloudfront": "^1.149.0",
+    "@aws-cdk/aws-codebuild": "^1.149.0",
+    "@aws-cdk/aws-codecommit": "^1.149.0",
+    "@aws-cdk/aws-codepipeline": "^1.149.0",
+    "@aws-cdk/aws-codepipeline-actions": "^1.149.0",
+    "@aws-cdk/aws-iam": "^1.149.0",
+    "@aws-cdk/aws-s3": "^1.149.0",
+    "aws-cdk-lib": "2.14.0",
+    "constructs": "^10.0.0",
+    "source-map-support": "^0.5.16"
+  }
+}
