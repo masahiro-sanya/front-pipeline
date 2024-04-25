@@ -1,0 +1,34 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - "echo update npm..."
+      - "npm install -g"
+      - "npm update -g npm"
+      - "echo node -v"
+      - "node -v"
+      - "echo npm -v"
+      - "npm -v"
+  pre_build:
+    commands:
+      - "echo Installing source NPM dependencies..."
+      - "npm install"
+  build:
+    commands:
+      - "echo build start"
+      - "npm run build"
+      - "echo build completed"
+  post_build:
+    commands:
+      - "echo Target S3 Bucket s3://${S3_BUCKET_NAME}"
+      - "echo Delete S3 Bucket object..."
+      - "aws s3 rm s3://${S3_BUCKET_NAME} --recursive"
+      - "echo create invalidation"
+      - "aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths '/*'"
+artifacts:
+  files:
+    - "**/*"
+  base-directory: "dist"

@@ -1,0 +1,12 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - "echo clean start"
+      - "aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths '/*'"
+      - "echo clean completed"
+artifacts:
+  files:
+    - "**/*"
+  base-directory: "dist"
