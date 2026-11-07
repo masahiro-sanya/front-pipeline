@@ -193,7 +193,7 @@ export class FePipelineDevStack extends cdk.Stack {
         `build/${phase}_buildspec_build.yml`
       ),
       environment: {
-        buildImage: codebuild.LinuxBuildImage.STANDARD_5_0,
+        buildImage: codebuild.LinuxBuildImage.STANDARD_7_0,
         privileged: true,
         environmentVariables: {
           CLOUDFRONT_DISTRIBUTION_ID: { value: distributionId },
@@ -232,7 +232,7 @@ export class FePipelineDevStack extends cdk.Stack {
         `build/${phase}_buildspec_clean.yml`
       ),
       environment: {
-        buildImage: codebuild.LinuxBuildImage.STANDARD_5_0,
+        buildImage: codebuild.LinuxBuildImage.STANDARD_7_0,
         privileged: true,
         environmentVariables: {
           CLOUDFRONT_DISTRIBUTION_ID: { value: distributionId },
